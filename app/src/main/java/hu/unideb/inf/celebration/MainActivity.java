@@ -1,6 +1,7 @@
 package hu.unideb.inf.celebration;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import hu.unideb.inf.celebration.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.downloadButton.setOnClickListener(view -> startDownload());
+        path = getFilesDir().getParent();
+        Log.d("asdf", path);
     }
 
     private void startDownload() {
         new DownloadAsyncTask(
                 binding.downloadButton,
                 binding.progressBar,
-                binding.downloadTextView
+                binding.downloadTextView,
+                path
         ).execute();
     }
 }
