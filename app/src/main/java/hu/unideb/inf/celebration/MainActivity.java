@@ -1,5 +1,6 @@
 package hu.unideb.inf.celebration;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,8 +32,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.downloadButton.setOnClickListener(view -> startDownload());
+        binding.playButton.setOnClickListener(view -> playSong());
         path = getFilesDir().getParent();
         Log.d("asdf", path);
+    }
+
+    MediaPlayer mPlayer;
+
+    public void playSong() {
+        mPlayer = new MediaPlayer();
+        try {
+            mPlayer.setDataSource(
+                    path + "/files/song.mp3");
+            mPlayer.prepare();
+            // Start playing the Music file
+            mPlayer.start();
+        } catch (Exception e) {
+            Log.e("IOEX", e.getMessage());
+        }
     }
 
     private void startDownload() {
