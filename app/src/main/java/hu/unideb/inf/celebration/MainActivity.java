@@ -40,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mPlayer;
 
     public void playSong() {
-        mPlayer = new MediaPlayer();
+        if (mPlayer==null)
+            mPlayer = new MediaPlayer();
+        else
+            mPlayer.reset();
+
         try {
             mPlayer.setDataSource(
                     path + "/files/song.mp3");
